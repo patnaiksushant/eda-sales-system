@@ -15,7 +15,7 @@ def main():
         # ---------------- [1/10] Read sales data ----------------
         print("[1/10] Reading sales data...")
         sales_file = "data/sales_data.txt"  # change if your file name differs
-        raw_lines = file_handler.read_sales_data(sales_file)
+        raw_lines = file_handler.read_sales_data(sales_file, 'utf-8')
         print(f"✓ Successfully read {len(raw_lines)} transactions")
         print()
 
@@ -72,7 +72,7 @@ def main():
 
         # ---------------- [4/10] Validate & filter ----------------
         print("[4/10] Validating transactions...")
-        valid_transactions, invalid_count, summary = file_handler.validate_and_filter(
+        valid_transactions, invalid_count = file_handler.validate_and_filter(
             parsed_transactions, region=region, min_amount=min_amount, max_amount=max_amount
         )
         print(f"✓ Valid: {len(valid_transactions)} | Invalid: {invalid_count}")
@@ -81,13 +81,13 @@ def main():
         # ---------------- [5/10] Analysis (Part 2) ----------------
         print("[5/10] Analyzing sales data...")
 
-        total_rev = data_preproccessor.calculate_total_revenue(valid_transactions)
-        region_perf = data_preproccessor.region_wise_sales(valid_transactions)
-        top_products = data_preproccessor.top_selling_products(valid_transactions, n=5)
-        cust_stats = data_preproccessor.customer_analysis(valid_transactions)
-        daily_trend = data_preproccessor.daily_sales_trend(valid_transactions)
-        peak_day = data_preproccessor.find_peak_sales_day(valid_transactions)
-        low_products = data_preproccessor.low_performing_products(valid_transactions, threshold=10)
+        total_rev = data_preproccessor.calculate_total_revenue(parsed_transactions)
+        region_perf = data_preproccessor.region_wise_sales(parsed_transactions)
+        top_products = data_preproccessor.top_selling_products(parsed_transactions, n=5)
+        cust_stats = data_preproccessor.customer_analysis(parsed_transactions)
+        daily_trend = data_preproccessor.daily_sales_trend(parsed_transactions)
+        peak_day = data_preproccessor.find_peak_sales_day(parsed_transactions)
+        low_products = data_preproccessor.low_performing_products(parsed_transactions, threshold=10)
 
         print("✓ Analysis complete")
         print()

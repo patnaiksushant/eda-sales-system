@@ -85,6 +85,8 @@ def generate_sales_report(transactions, enriched_transactions, output_file='outp
     avg_order_value = (total_revenue / total_transactions) if total_transactions else 0.0
     min_date, max_date = safe_date_range(transactions)
 
+    
+
     # ---------------- 3) REGION-WISE PERFORMANCE ----------------
     region_stats = {}
     grand_total = 0.0
